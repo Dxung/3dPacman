@@ -4,19 +4,19 @@ using UnityEngine.Playables;
 public class PlayerMovingController : MonoBehaviour
 {
     [Header("Can Player Move?")]
-    public bool _canMove { get; private set; } = true;
+    private bool _canMove  = true;
 
     [Header("Movement Parameters")]
-    [SerializeField] private float _constantSpeed = 2f;
-    [SerializeField] private float _walkSpeed;
+    [SerializeField] private float _constantSpeed = 2.0f;
     [SerializeField] private float _gravity = 9.8f;
+    [SerializeField] private float _walkSpeed;
 
     [Header("Look Parameters")]
     [SerializeField, Range(1, 10)] private float _lookSpeedX = 2.0f;
     [SerializeField, Range(1, 10)] private float _lookSpeedY = 2.0f;
     [SerializeField, Range(1, 180)] private float _upperLookLimit = 80.0f;
     [SerializeField, Range(1, 180)] private float _lowerLookLimit = 80.0f;
-    private float _rotationX = 0;
+    private float _rotationX = 0; //Chac chan rang camera nhin thang phia truoc va khong bi xoay dot ngot khi bat dau phien van choi
 
     [Header("Player State")]
     private PlayerStateController _playerStateController;
@@ -94,37 +94,42 @@ public class PlayerMovingController : MonoBehaviour
     /*--- Speed ---*/
     private void SpeedControl()
     {
-        if (_playerStateController.IsitThatState("normal"))
+        if (_playerStateController.GetCurrentState() == PlayerState.normal)
         {
-            SpeedChange(_constantSpeed);
+            ChangeSpeed(_constantSpeed);
         }
-        else if (_playerStateController.IsitThatState("consume"))
+        else if (_playerStateController.GetCurrentState() == PlayerState.consume)
         {
-            SpeedChange(0.9f * _constantSpeed);
+            ChangeSpeed(0.9f * _constantSpeed);
         }
-        else if (_playerStateController.IsitThatState("powerUp"))
+        else if (_playerStateController.GetCurrentState() == PlayerState.powerUp)
         {
-            SpeedChange(1.5f * _constantSpeed);
+            ChangeSpeed(1.5f * _constantSpeed);
         }
-        else if (_playerStateController.IsitThatState("dead"))
+        else if (_playerStateController.GetCurrentState() == PlayerState.dead)
         {
-            SpeedChange(0);
+            ChangeSpeed(0);
         }
     }
 
-    private void SpeedChange(float speed)
+    private void ChangeSpeed(float speed)
     {
         _walkSpeed = speed;
     }
 
     public void ReSpawnPacman()
     {
+        //lock all input until respawn complete
         _canMove = false;
         this.gameObject.GetComponent<CharacterController>().enabled = false;
         this.gameObject.transform.position = _startingposition;
         this.gameObject.GetComponent<CharacterController>().enabled = true;
         _canMove = true;
-        SpeedChange(_constantSpeed);
+
+        //change to original speed
+        ChangeSpeed(_constantSpeed);
+
+        //change to original state
         _playerStateController.ReSpawn();
     }
 }

@@ -2,13 +2,6 @@ using UnityEngine;
 
 public class PlayerStateController : MonoBehaviour
 {
-    private enum PlayerState
-    {
-        normal,
-        consume,
-        powerUp,
-        dead
-    }
 
     [Header("Timer for each state")]
     [SerializeField] private float _slowdownTimeWhenConsuming;
@@ -26,7 +19,7 @@ public class PlayerStateController : MonoBehaviour
 
     private void Update()
     {
-        UpdatePlayerState();
+        UpdateStateTimer();
     }
 
 
@@ -42,18 +35,25 @@ public class PlayerStateController : MonoBehaviour
 
     /*--- State ---*/
 
-    private void UpdatePlayerState()
+    //if "consume state" -> countdown
+    //if "powerUp state" -> countdown
+    //if "dead state" -> respawn -> normal state ==> no need
+    //if "normal state" ==> no need
+
+    private void UpdateStateTimer()
     {
         if (_currentPlayerState == PlayerState.consume)
         {
-            UpdateConsumeModeTimer();
+            ConsumeModeTimerCountDown();
         }
         else if (_currentPlayerState == PlayerState.powerUp)
         {
-            UpdatePowerUpModeTimer();
+            PowerUpModeTimerCountDown();
         }
     }
 
+
+    //Not dead + Not PowerUp =>Can turn to Consume State (Speed Down)
     public void TurnToConsumeState()
     {
         if ((_currentPlayerState!=PlayerState.powerUp) && (_currentPlayerState != (PlayerState.dead)))
@@ -63,6 +63,8 @@ public class PlayerStateController : MonoBehaviour
         }
     }
 
+
+    //Not Dead => Can turn to Powerup State
     public void TurnToPowerUpState()
     {
         if (_currentPlayerState != (PlayerState.dead))
@@ -72,6 +74,8 @@ public class PlayerStateController : MonoBehaviour
         }
     }
 
+
+    //Dead => Turn to Dead State
     public void Dead()
     {
         ChangeState(PlayerState.dead);
@@ -81,15 +85,22 @@ public class PlayerStateController : MonoBehaviour
     {
         ChangeState(PlayerState.normal);
     }
+    
 
     private void ChangeState(PlayerState state)
     {
         _currentPlayerState = state;
     }
 
+    public PlayerState GetCurrentState()
+    {
+        return _currentPlayerState;
+    }
 
+
+    //If ConsumedMode Time Out => Turn to Normal State
     /*--- Timer ---*/
-    private void UpdateConsumeModeTimer()
+    private void ConsumeModeTimerCountDown()
     {
         if (IsTimeOut(_slowdownTimeWhenConsuming))
         {
@@ -102,7 +113,9 @@ public class PlayerStateController : MonoBehaviour
         }
     }
 
-    private void UpdatePowerUpModeTimer()
+
+    //If PowerUpMode Time Out => Turn to Normal State
+    private void PowerUpModeTimerCountDown()
     {
         if (IsTimeOut(_powerUpTime))
         {
@@ -126,43 +139,4 @@ public class PlayerStateController : MonoBehaviour
         return _currentTimer > timeForThatState;
     }
 
-
-
-
-    public bool IsitThatState(string check)
-    {
-        if(check == "normal")
-        {
-            if(_currentPlayerState == PlayerState.normal)
-            {
-                return true;
-            }
-            else return false;
-        }
-        if(check == "consume")
-        {
-            if (_currentPlayerState == PlayerState.consume)
-            {
-                return true;
-            }
-            else return false;
-        }
-        if(check == "powerUp")
-        {
-            if (_currentPlayerState == PlayerState.powerUp)
-            {
-                return true;
-            }
-            else return false;
-        }
-        if (check == "dead")
-        {
-            if (_currentPlayerState == PlayerState.dead)
-            {
-                return true;
-            }
-            else return false;
-        }
-        else return false;
-    }
 }

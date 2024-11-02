@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Pellet
-  - Power Pellet
-  - Small Pellet
+  - NormalPellet
+  - PowerPellet
   layers:
   - Default
   - TransparentFX
