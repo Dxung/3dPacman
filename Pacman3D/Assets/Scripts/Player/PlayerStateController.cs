@@ -4,8 +4,7 @@ public class PlayerStateController : MonoBehaviour
 {
 
     [Header("Timer for each state")]
-    [SerializeField] private float _slowdownTimeWhenConsuming;
-    [SerializeField] private float _powerUpTime;
+    [SerializeField] private StateDuration _stateDuration;
     private float _currentTimer;
 
     [Header("Player State")]
@@ -21,16 +20,6 @@ public class PlayerStateController : MonoBehaviour
     {
         UpdateStateTimer();
     }
-
-
-
-    /*--->>> DEBUG <<<---*/
-    //Debug.Log(_currentPlayerState);
-    //Debug.Log(_currentTimer);
-    //Debug.Log(_currentPlayerState);
-
-
-
 
 
     /*--- State ---*/
@@ -92,7 +81,7 @@ public class PlayerStateController : MonoBehaviour
         _currentPlayerState = state;
     }
 
-    public PlayerState GetCurrentState()
+    public PlayerState GetPlayerCurrentState()
     {
         return _currentPlayerState;
     }
@@ -102,7 +91,7 @@ public class PlayerStateController : MonoBehaviour
     /*--- Timer ---*/
     private void ConsumeModeTimerCountDown()
     {
-        if (IsTimeOut(_slowdownTimeWhenConsuming))
+        if (IsTimeOut(_stateDuration.SlowdownDurationWhenConsuming()))
         {
             ChangeState(PlayerState.normal);
             ResetTimer();
@@ -117,7 +106,7 @@ public class PlayerStateController : MonoBehaviour
     //If PowerUpMode Time Out => Turn to Normal State
     private void PowerUpModeTimerCountDown()
     {
-        if (IsTimeOut(_powerUpTime))
+        if (IsTimeOut(_stateDuration.FrightenOrPowerUpDuration()))
         {
             ChangeState(PlayerState.normal);
             ResetTimer();

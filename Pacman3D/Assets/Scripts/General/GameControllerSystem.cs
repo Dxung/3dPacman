@@ -7,7 +7,8 @@ public class GameControllerSystem : MonoBehaviour
     public static GameControllerSystem Instance {  get; private set; }
 
 
-    [Header("State Controller")]
+    [Header("Player")]
+    [SerializeField] private GameObject _player;
     [SerializeField] private PlayerStateController _playerStateController;
 
 
@@ -39,9 +40,13 @@ public class GameControllerSystem : MonoBehaviour
         _playerStateController.TurnToConsumeState();
     }
 
+    /*--- Player ---*/
 
+    public Transform WhereIsPlayer()
+    {
+        return _player.transform;
+    }
 
-    /*--- State ---*/
     public PlayerStateController GetPlayerController()
     {
         return _playerStateController;

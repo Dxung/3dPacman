@@ -7,9 +7,9 @@ public class PlayerMovingController : MonoBehaviour
     private bool _canMove  = true;
 
     [Header("Movement Parameters")]
-    [SerializeField] private float _constantSpeed = 2.0f;
+    [SerializeField] private float _normalStateSpeed = 2.0f;
     [SerializeField] private float _gravity = 9.8f;
-    [SerializeField] private float _walkSpeed;
+    [SerializeField] private float _currentSpeed;
 
     [Header("Look Parameters")]
     [SerializeField, Range(1, 10)] private float _lookSpeedX = 2.0f;
@@ -63,7 +63,7 @@ public class PlayerMovingController : MonoBehaviour
     private void HandleMovementInput()
     { 
         Vector2 tempToNormalize = new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
-        _currentInput = tempToNormalize.normalized * _walkSpeed;
+        _currentInput = tempToNormalize.normalized * _currentSpeed;
         float moveDirectionY = _moveDirection.y;       
         _moveDirection = (transform.TransformDirection(Vector3.forward) * _currentInput.x) + (transform.TransformDirection(Vector3.right) * _currentInput.y);
         _moveDirection.y = moveDirectionY; //reset player height after moving
@@ -94,19 +94,19 @@ public class PlayerMovingController : MonoBehaviour
     /*--- Speed ---*/
     private void SpeedControl()
     {
-        if (_playerStateController.GetCurrentState() == PlayerState.normal)
+        if (_playerStateController.GetPlayerCurrentState() == PlayerState.normal)
         {
-            ChangeSpeed(_constantSpeed);
+            ChangeSpeed(_normalStateSpeed);
         }
-        else if (_playerStateController.GetCurrentState() == PlayerState.consume)
+        else if (_playerStateController.GetPlayerCurrentState() == PlayerState.consume)
         {
-            ChangeSpeed(0.9f * _constantSpeed);
+            ChangeSpeed(0.9f * _normalStateSpeed);
         }
-        else if (_playerStateController.GetCurrentState() == PlayerState.powerUp)
+        else if (_playerStateController.GetPlayerCurrentState() == PlayerState.powerUp)
         {
-            ChangeSpeed(1.5f * _constantSpeed);
+            ChangeSpeed(1.5f * _normalStateSpeed);
         }
-        else if (_playerStateController.GetCurrentState() == PlayerState.dead)
+        else if (_playerStateController.GetPlayerCurrentState() == PlayerState.dead)
         {
             ChangeSpeed(0);
         }
@@ -114,7 +114,7 @@ public class PlayerMovingController : MonoBehaviour
 
     private void ChangeSpeed(float speed)
     {
-        _walkSpeed = speed;
+        _currentSpeed = speed;
     }
 
     public void ReSpawnPacman()
@@ -127,7 +127,7 @@ public class PlayerMovingController : MonoBehaviour
         _canMove = true;
 
         //change to original speed
-        ChangeSpeed(_constantSpeed);
+        ChangeSpeed(_normalStateSpeed);
 
         //change to original state
         _playerStateController.ReSpawn();

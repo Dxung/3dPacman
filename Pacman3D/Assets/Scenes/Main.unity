@@ -663,6 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109b1a8237b5fc84286b193cc9eb28d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 9153979185666080587}
   _playerStateController: {fileID: 2043918551322532372}
   _scoreBar: {fileID: 8435454783303584409}
   _pelletCounter: {fileID: 6481872012545737632}
@@ -9902,8 +9903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a209c91181c968a4187b94da1788c716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slowdownTimeWhenConsuming: 2
-  _powerUpTime: 8
+  _stateDuration: {fileID: 0}
 --- !u!114 &2059668225469728377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10822,9 +10822,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1180112444295304606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 1eeb3b2bc81dca145b87f533bc6c4c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentGhostState: 1
+  _currentTimer: 0
+  _modeSwitchIteration: 1
+  _lastStateBeforeChange: 0
+  _lastTimerBeforeChange: 0
+  _durationForState: {fileID: 11400000, guid: 3ef22be2b5ffd0c4c90654722ca9597f, type: 2}
 --- !u!4 &3953690399493997152
 Transform:
   m_ObjectHideFlags: 0
@@ -11022,9 +11028,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5595098335083684141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 1eeb3b2bc81dca145b87f533bc6c4c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentGhostState: 1
+  _currentTimer: 0
+  _modeSwitchIteration: 1
+  _lastStateBeforeChange: 0
+  _lastTimerBeforeChange: 0
+  _durationForState: {fileID: 11400000, guid: 3ef22be2b5ffd0c4c90654722ca9597f, type: 2}
 --- !u!212 &4210827173898047558
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11420,9 +11432,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4688101937313099497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 1eeb3b2bc81dca145b87f533bc6c4c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentGhostState: 1
+  _currentTimer: 0
+  _modeSwitchIteration: 1
+  _lastStateBeforeChange: 0
+  _lastTimerBeforeChange: 0
+  _durationForState: {fileID: 11400000, guid: 3ef22be2b5ffd0c4c90654722ca9597f, type: 2}
 --- !u!4 &5361078653495683252
 Transform:
   m_ObjectHideFlags: 0
@@ -12818,9 +12836,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7663602461343509672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 2ad9c013400c7ef40bac895d2ea697db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentGhostState: 1
+  _currentTimer: 0
+  _modeSwitchIteration: 1
+  _lastStateBeforeChange: 0
+  _lastTimerBeforeChange: 0
+  _durationForState: {fileID: 11400000, guid: 3ef22be2b5ffd0c4c90654722ca9597f, type: 2}
+  _switchingStateRadius: 10
+  _gameControlSystem: {fileID: 1077292655}
+  _clydeTransformXZ: {x: 0, y: 0, z: 0}
+  _playerTransformXZ: {x: 0, y: 0, z: 0}
 --- !u!4 &7291056081522157525
 Transform:
   m_ObjectHideFlags: 0
@@ -14218,9 +14246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f331e78ccee9c4fbb7aab08690cbd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _constantSpeed: 1.8
+  _normalStateSpeed: 2
   _gravity: 20
-  _walkSpeed: 2
+  _currentSpeed: 0
   _lookSpeedX: 2
   _lookSpeedY: 2
   _upperLookLimit: 80
