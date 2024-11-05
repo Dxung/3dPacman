@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 
 public class MapGenerate : MonoBehaviour
 {
@@ -11,19 +12,21 @@ public class MapGenerate : MonoBehaviour
     [Header("TileBase marks Tile for Drawing")]
     [SerializeField] private TileBase _wallTile;
     [SerializeField] private TileBase _blankTile;
-    [SerializeField] private TileBase _superPelletTile;
+    [SerializeField] private TileBase _powerPelletTile;
 
     [Header("GameObjects to Generate")]
     [SerializeField] private GameObject _wallPreference;
     [SerializeField] private GameObject _smallPellet;
-    [SerializeField] private GameObject _superPellet;
+    [SerializeField] private GameObject _powerPellet;
 
     [Header("Floating height of pellet")]
     [SerializeField] private float _up;
 
-    [Header("for updating UI")]
+    [Header("For updating UI")]
     [SerializeField] private PelletCounter _pelletCounter;
 
+    [Header("For NavMesh Surfaces")]
+    [SerializeField] private NavMeshSurface[] surfaces;
 
     private void Start()
     {
@@ -45,14 +48,14 @@ public class MapGenerate : MonoBehaviour
                 {
                     Instantiate(_wallPreference, cellPosition + new Vector3(0, 0.5f, 0), Quaternion.identity);
                 }
-                else if (tilebase == _superPelletTile)
+                else if (tilebase == _powerPelletTile)
                 {
-                    Instantiate(_superPellet, cellPosition + new Vector3(0, _up, 0), Quaternion.identity);
+                    Instantiate(_powerPellet, cellPosition + new Vector3(0, _up, 0), Quaternion.identity);
                     UpdatePowerPelletCounter();
                 }
                 else
                 {
-                    
+
                     Instantiate(_smallPellet, cellPosition + new Vector3(0, _up, 0), Quaternion.identity);
                     UpdateSmallPelletCounter();
                 }
@@ -62,6 +65,10 @@ public class MapGenerate : MonoBehaviour
 
 
         }
+
+        InitNavMesh();
+    }
+
 
         void UpdateSmallPelletCounter()
         {
@@ -73,7 +80,14 @@ public class MapGenerate : MonoBehaviour
             _pelletCounter.AddOnePowerPelletToCounter();
         }
 
+        void InitNavMesh()
+        {
+            for (int i = 0; i < surfaces.Length; i++)
+            {
 
+                surfaces[i].BuildNavMesh();
+            }
+        }
 
-    }
+    
 }

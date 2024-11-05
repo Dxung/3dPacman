@@ -94,22 +94,27 @@ public class PlayerMovingController : MonoBehaviour
     /*--- Speed ---*/
     private void SpeedControl()
     {
-        if (_playerStateController.GetPlayerCurrentState() == PlayerState.normal)
+        if (_playerStateController.CheckCurrentState(PlayerState.normal))
         {
             ChangeSpeed(_normalStateSpeed);
         }
-        else if (_playerStateController.GetPlayerCurrentState() == PlayerState.consume)
+        else if (_playerStateController.CheckCurrentState(PlayerState.consume))
         {
             ChangeSpeed(0.9f * _normalStateSpeed);
         }
-        else if (_playerStateController.GetPlayerCurrentState() == PlayerState.powerUp)
+        else if (_playerStateController.CheckCurrentState(PlayerState.powerUp))
         {
             ChangeSpeed(1.5f * _normalStateSpeed);
         }
-        else if (_playerStateController.GetPlayerCurrentState() == PlayerState.dead)
+        else if (_playerStateController.CheckCurrentState(PlayerState.dead))
         {
             ChangeSpeed(0);
         }
+    }
+
+    public float GetPlayerNormalSpeed()
+    {
+        return _normalStateSpeed;
     }
 
     private void ChangeSpeed(float speed)
@@ -129,7 +134,7 @@ public class PlayerMovingController : MonoBehaviour
         //change to original speed
         ChangeSpeed(_normalStateSpeed);
 
-        //change to original state
+        //change state to original state
         _playerStateController.ReSpawn();
     }
 }

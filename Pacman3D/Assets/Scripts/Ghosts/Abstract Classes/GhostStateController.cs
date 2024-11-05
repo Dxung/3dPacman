@@ -18,18 +18,18 @@ public abstract class GhostStateController : MonoBehaviour
 
 
     //luon bat dau voi scatter
-    protected void Awake()
+    protected virtual void Awake()
     {
-        ReSpawnGhostState();
+        RestartGhostStateWhenRespawn();
     }
 
-    protected void Update()
+    private void Update()
     {
         UpdateGhostState();
     }
 
 
-                                            ///*--- Abstract Class ---*///
+                                            ///*--- Abstract Func ---*///
 
     protected abstract void UpdateGhostState();
 
@@ -118,7 +118,7 @@ public abstract class GhostStateController : MonoBehaviour
         }
     }
 
-    protected void ResumeGhostStatus()
+    public void ResumeGhostStatus()
     {
         _currentTimer = _lastTimerBeforeChange;
         ChangeGhostStateTo(_lastStateBeforeChange);
@@ -135,6 +135,12 @@ public abstract class GhostStateController : MonoBehaviour
     protected void ChangeGhostStateTo(GhostState ghostStateToChangeTo)
     {
         _currentGhostState = ghostStateToChangeTo;
+    }
+
+    public bool TimeFrightenedNearlyOver(float timeBeforeOver)
+    {
+        float secondsRunned = _durationForState.FrightenOrPowerUpDuration() - timeBeforeOver;
+        return _currentTimer > secondsRunned;
     }
 
 
@@ -156,10 +162,10 @@ public abstract class GhostStateController : MonoBehaviour
     }
 
                                             ///*--- Respawn ---*///
-    public void ReSpawnGhostState()
+    public void RestartGhostStateWhenRespawn()
     {
-        _modeSwitchIteration = 1;
-        ResetTimer();
+        //_modeSwitchIteration = 1;
+        //ResetTimer();
         ChangeGhostStateTo(GhostState.scatter);
     }
 }

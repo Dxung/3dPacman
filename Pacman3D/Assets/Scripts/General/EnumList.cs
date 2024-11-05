@@ -2,7 +2,8 @@ public enum TagEnum
 {
     Player,
     NormalPellet,
-    PowerPellet
+    PowerPellet,
+    Ghosts,
 }
 
 public enum PlayerState
@@ -13,6 +14,14 @@ public enum PlayerState
     dead
 }
 
+public enum GhostName
+{
+    blinky,
+    pinky,
+    inky,
+    clyde
+}
+
 public enum GhostState
 {
     chase,
@@ -20,3 +29,4 @@ public enum GhostState
     frightened,
     eaten
 }
+

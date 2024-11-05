@@ -2,10 +2,15 @@ using UnityEngine;
 
 public class HealthCounter : MonoBehaviour
 {
-    private int _playerHealth;
+    private int _playerHealth = 3;
     [SerializeField] private GameObject[] _healthIcons;
 
-    protected void UpdatePlayerHealth()
+    private void Start()
+    {
+        UpdatePlayerHealth();
+    }
+
+    public void UpdatePlayerHealth()
     {
         if (_playerHealth == 0)
         {
@@ -25,6 +30,20 @@ public class HealthCounter : MonoBehaviour
             {
                 _healthIcons[i].SetActive(false);
             }
+        }
+    }
+
+    public bool CheckIfPlayerDead()
+    {
+        _playerHealth -= 1;
+        if (_playerHealth == 0)
+        {
+            return true;
+        }
+
+        else
+        {
+            return false;
         }
     }
 

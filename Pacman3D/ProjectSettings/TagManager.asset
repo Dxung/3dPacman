@@ -7,6 +7,8 @@ TagManager:
   - Pellet
   - NormalPellet
   - PowerPellet
+  - Ghosts
+  - Power Pellet
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - Water
   - UI
   - MiniMap
-  - 
+  - Ghosts
   - 
   - 
   - 

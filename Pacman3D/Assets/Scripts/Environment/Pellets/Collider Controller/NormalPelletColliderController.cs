@@ -4,35 +4,35 @@ using UnityEngine;
 public class NormalPelletColliderController : MonoBehaviour
 {
     [Header("Pellet Particle System")]
-    protected ParticleSystem _pelletParticleSystem;
-    protected float _timeToCompletePelletEffect;
+    private ParticleSystem _pelletParticleSystem;
+    private float _timeToCompletePelletEffect;
 
     [Header("References when particle effect happens")]
-    protected Collider _pelletTrigger;
-    protected MeshRenderer _pelletMesh;
-    protected Light _pelletLight;
-    protected SpriteRenderer _pelletMinimapIcon;
+    private Collider _pelletTrigger;
+    private MeshRenderer _pelletMesh;
+    private Light _pelletLight;
+    private SpriteRenderer _pelletMinimapIcon;
     [SerializeField] protected TagEnum _playerTag;
 
     [Header("Game Controller System")]
-    protected GameControllerSystem _gameControllerSystem;
+    protected GameCommunicationSystem _gameControllerSystem;
 
 
 
     /***--- Init ---***/
-    protected void Awake()
+    private void Awake()
     {
         _pelletParticleSystem = this.transform.parent.GetComponentInChildren<ParticleSystem>();
         _pelletMesh = this.transform.parent.GetComponent<MeshRenderer>();
         _pelletTrigger = this.GetComponent<Collider>();
         _pelletLight = this.transform.parent.GetComponentInChildren<Light>();
         _pelletMinimapIcon = this.transform.parent.GetComponentInChildren<SpriteRenderer>();
-        _gameControllerSystem = GameControllerSystem.Instance;
+        _gameControllerSystem = GameCommunicationSystem.Instance;
 
         setUpTotalEffectTime();
 }
 
-    protected void setUpTotalEffectTime()
+    private void setUpTotalEffectTime()
     {
         /*--- main.duration: Khoang thoi gian ma he thong Particle System tao ra cac Particle ---*/
         /*--- startLifetime: Khoang thoi gian Particle ton tai sau khi duoc tao ra ---*/

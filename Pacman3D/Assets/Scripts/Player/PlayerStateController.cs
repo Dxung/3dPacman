@@ -8,7 +8,7 @@ public class PlayerStateController : MonoBehaviour
     private float _currentTimer;
 
     [Header("Player State")]
-    private PlayerState _currentPlayerState;
+    [SerializeField] private PlayerState _currentPlayerState;
 
 
     private void Start()
@@ -81,9 +81,9 @@ public class PlayerStateController : MonoBehaviour
         _currentPlayerState = state;
     }
 
-    public PlayerState GetPlayerCurrentState()
+    public bool CheckCurrentState(PlayerState stateToCheck)
     {
-        return _currentPlayerState;
+        return stateToCheck == _currentPlayerState;
     }
 
 
