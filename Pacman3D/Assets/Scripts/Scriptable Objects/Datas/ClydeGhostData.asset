@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ClydeGhostData
   m_EditorClassIdentifier: 
   _ghostName: 3
-  _GhostSpawnPosition: {x: 0, y: 0, z: 0}
+  _GhostSpawnPosition: {x: -5.3, y: 0, z: 10.3}
   _ghostScatterPaths:
   - {x: 1.5, y: 0, z: 21.3}
   - {x: 7.15, y: 0, z: 21.3}

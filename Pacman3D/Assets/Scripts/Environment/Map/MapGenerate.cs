@@ -23,13 +23,14 @@ public class MapGenerate : MonoBehaviour
     [SerializeField] private float _up;
 
     [Header("For updating UI")]
-    [SerializeField] private PelletCounter _pelletCounter;
+    [SerializeField] private GameCommunicationSystem _gameCommunicationSystem;
 
     [Header("For NavMesh Surfaces")]
     [SerializeField] private NavMeshSurface[] surfaces;
 
     private void Start()
     {
+        _gameCommunicationSystem = GameCommunicationSystem.Instance;   
         GenerateWorld();
     }
 
@@ -42,43 +43,34 @@ public class MapGenerate : MonoBehaviour
             Vector3 cellPosition = _myTileMap.GetCellCenterWorld(position);         //switch tilemap pos -> worldmap pos
 
 
-            if (tilebase != _blankTile)
+            if (tilebase == _blankTile)
             {
-                if (tilebase == _wallTile)
-                {
-                    Instantiate(_wallPreference, cellPosition + new Vector3(0, 0.5f, 0), Quaternion.identity);
-                }
-                else if (tilebase == _powerPelletTile)
-                {
-                    Instantiate(_powerPellet, cellPosition + new Vector3(0, _up, 0), Quaternion.identity);
-                    UpdatePowerPelletCounter();
-                }
-                else
-                {
-
-                    Instantiate(_smallPellet, cellPosition + new Vector3(0, _up, 0), Quaternion.identity);
-                    UpdateSmallPelletCounter();
-                }
 
             }
+            else if (tilebase == _wallTile)
+            {
+                Instantiate(_wallPreference, cellPosition + new Vector3(0, 0.5f, 0), Quaternion.identity);
+            }
+            else if (tilebase == _powerPelletTile)
+            {
+                //tao power pellet
+                Instantiate(_powerPellet, cellPosition + new Vector3(0, _up, 0), Quaternion.identity);
 
+                //tang them 1 power pellet tren counter
+                _gameCommunicationSystem.PowerPelletToCounter();
+            }
+            else
+            {
+                //tao normal pellet
+                Instantiate(_smallPellet, cellPosition + new Vector3(0, _up, 0), Quaternion.identity);
 
-
+                //tang them 1 normal pellet tren counter
+                _gameCommunicationSystem.NormalPelletToCounter();
+            }
         }
 
         InitNavMesh();
     }
-
-
-        void UpdateSmallPelletCounter()
-        {
-            _pelletCounter.AddOneSmallPelletToCounter();
-        }
-
-        void UpdatePowerPelletCounter()
-        {
-            _pelletCounter.AddOnePowerPelletToCounter();
-        }
 
         void InitNavMesh()
         {

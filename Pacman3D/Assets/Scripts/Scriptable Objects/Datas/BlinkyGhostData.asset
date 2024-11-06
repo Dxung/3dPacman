@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BlinkyGhostData
   m_EditorClassIdentifier: 
   _ghostName: 0
-  _GhostSpawnPosition: {x: 0, y: 0, z: 0}
+  _GhostSpawnPosition: {x: -7.5, y: 0, z: 8.5}
   _ghostScatterPaths:
   - {x: -14.5, y: 0, z: -2.5}
   - {x: -14.5, y: 0, z: -5.5}

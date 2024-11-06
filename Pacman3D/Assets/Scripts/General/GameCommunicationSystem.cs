@@ -122,6 +122,16 @@ public class GameCommunicationSystem : MonoBehaviour
         _scoreBar.AddPointFromPowerPellet();
     }
 
+    public void NormalPelletToCounter()
+    {
+        _pelletCounter.AddOneSmallPelletToCounter();
+    }
+
+    public void PowerPelletToCounter()
+    {
+        _pelletCounter.AddOnePowerPelletToCounter();
+    }
+
     /*--- When Player Got Caught ---*/
     private void StopAllGhost()
     {

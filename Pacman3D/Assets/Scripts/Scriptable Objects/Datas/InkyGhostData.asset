@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: InkyGhostData
   m_EditorClassIdentifier: 
   _ghostName: 2
-  _GhostSpawnPosition: {x: 0, y: 0, z: 0}
+  _GhostSpawnPosition: {x: -7.5, y: 0, z: 10.3}
   _ghostScatterPaths:
   - {x: -11.6, y: 0, z: 21.3}
   - {x: -11.6, y: 0, z: 24.3}

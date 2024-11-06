@@ -7,9 +7,6 @@ public class GhostEffectController : MonoBehaviour
     [Header("Ghost State Controller")]
     private GhostStateController _ghostStateController;
 
-    [Header("Ghost Movement Controller")]
-    private GhostMovementController _ghostMovementController;
-
     [Header("Minimap Effect Controller")]
     private GhostMinimapEffectController _ghostMinimapEffectController;
 
@@ -38,7 +35,6 @@ public class GhostEffectController : MonoBehaviour
     {
         //Get Ref
         _ghostStateController = this.transform.parent.gameObject.GetComponentInChildren<GhostStateController>();
-        _ghostMovementController = this.transform.parent.gameObject.GetComponentInChildren<GhostMovementController>();
         _ghostMinimapEffectController = this.transform.parent.gameObject.GetComponentInChildren<GhostMinimapEffectController>();
 
         //Reset het color ve ban dau

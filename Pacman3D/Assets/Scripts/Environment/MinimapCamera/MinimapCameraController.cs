@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class MinimapCameraController : MonoBehaviour
 {
-    [SerializeField] private Transform _player;
+    [SerializeField] private GameCommunicationSystem _gameCommunicationSystem;
+
+    private void Start()
+    {
+        _gameCommunicationSystem = GameCommunicationSystem.Instance;
+    }
 
     private void LateUpdate()
     {
@@ -11,10 +16,10 @@ public class MinimapCameraController : MonoBehaviour
 
     private void CameraFollowPlayer()
     {
-        Vector3 newPosition = _player.position;
+        Vector3 newPosition = _gameCommunicationSystem.WhereIsPlayer().position;
         newPosition.y = transform.position.y;
         transform.position = newPosition;
 
-        transform.rotation = Quaternion.Euler(90f, _player.eulerAngles.y, 0f);
+        transform.rotation = Quaternion.Euler(90f, _gameCommunicationSystem.WhereIsPlayer().eulerAngles.y, 0f);
     }
 }

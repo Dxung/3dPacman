@@ -6,13 +6,10 @@ public class GhostRevive : MonoBehaviour
     {
         if (other.CompareTag(TagEnum.Ghosts.ToString()))
         {
-            Debug.Log("dung tag");
             GhostStateController ghostStateController = other.transform.gameObject.GetComponentInChildren<GhostStateController>();
 
-            Debug.Log(ghostStateController);
             if (ghostStateController.CheckCurrentState(GhostState.eaten))
             {
-                Debug.Log("da vao");
                 ghostStateController.ResumeGhostStatus();
             }
         }

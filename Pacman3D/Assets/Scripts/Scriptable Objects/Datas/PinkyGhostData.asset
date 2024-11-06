@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: PinkyGhostData
   m_EditorClassIdentifier: 
   _ghostName: 1
-  _GhostSpawnPosition: {x: 0, y: 0, z: 0}
+  _GhostSpawnPosition: {x: -10, y: 0, z: 10.3}
   _ghostScatterPaths:
-  - {x: 4.5, y: 0, z: -2.5}
-  - {x: 4.5, y: 0, z: -5.5}
-  - {x: 10, y: 0, z: -5.5}
-  - {x: 10, y: 0, z: -2.5}
+  - {x: 2.5, y: 0, z: -1.5}
+  - {x: 2.5, y: 0, z: -4.5}
+  - {x: 8.5, y: 0, z: -4.5}
+  - {x: 8.5, y: 0, z: -1.5}
   _ghostNormalColor: {r: 0.48235294, g: 0.03529412, b: 0.42745098, a: 0}
   _ghostfrightendedColor: {r: 0, g: 0.02745098, b: 0.7490196, a: 0}
   _ghostflickeringColor: {r: 0.40784314, g: 0.40784314, b: 0.45490196, a: 0}

@@ -25,13 +25,13 @@ public class BlinkyMovementController : GhostMovementController
     {
         //neu toc do rage qua 90% toc do normal cua player => lay 90%
         // neu khong, lay 1.2 lan toc do cua ghost
-        if (_ghostSpeed * 1.2f > _gameCommunicationSystem.HowFastIsPlayer() * 0.9f)
+        if (_ghostSpeed * 1.2f > _gameCommunicationSystem.HowFastIsPlayer())
         {
-            SetGhostSpeed(_gameCommunicationSystem.HowFastIsPlayer() * 0.9f);
+            SetGhostSpeed(_gameCommunicationSystem.HowFastIsPlayer());
         }
         else
         {
-            SetGhostSpeed(_ghostSpeed * 1.3f);
+            SetGhostSpeed(_ghostSpeed * 1.2f);
         }
     }
 
